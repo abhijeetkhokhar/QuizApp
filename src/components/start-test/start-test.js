@@ -24,7 +24,7 @@ export default function StartTest() {
 
     // collecting the user details (name, selected subject that we had stored)
     const user = JSON.parse(localStorage.getItem("userDetails") || "{}");
-    const { selectedSub = "", name = "" } = user || {};
+    const { selectedSub = "", name = "", } = user || {};
 
     // reading the user name and selected subject
 
@@ -49,14 +49,14 @@ export default function StartTest() {
   } = questions?.[currentQueIndex] || {};
   // initially it will be like questions[0]
 
-  function handleSlectAnswer(e) {
+  function handleSelectAnswer(e) {
     setAnswer(e.target.value);
     // setting the answer selected by the user .
   }
 
   function handleClickNext() {
     // calculating the score ans setting updating it to useState
-    const newScore = score + (answer == correctAns ? 2 : -1);
+    const newScore = score + (answer === correctAns ? 2 : -1);
     setScore(newScore);
 
     // if last question
@@ -68,6 +68,13 @@ export default function StartTest() {
 
     // if not last questions update current question index to prev + 1
     setCurrentQueIndex(currentQueIndex + 1);
+  }
+
+  function handleClickPrevious() {
+    const prevScore = score - (answer === correctAns ? 2 : -1);
+    setScore(prevScore);
+    // move to the previous question
+    setCurrentQueIndex(currentQueIndex - 1);
   }
 
   //  when test submitted will be true on submit last question
@@ -104,18 +111,27 @@ export default function StartTest() {
                   type="radio"
                   value={option}
                   name={currentQueIndex}
-                  onChange={handleSlectAnswer}
+                  onChange={handleSelectAnswer}
                   checked={option === answer}
                 />
                 <label>{option}</label>
               </div>
             ))}
           </div>
-          <CustomButton
-            customStyle={styles.btnText}
-            btnText={currentQueIndex === 4 ? "Submit" : "Next"}
-            handlerFunction={handleClickNext}
-          />
+          <div className={styles.buttonGroup}>
+            {currentQueIndex !== 0 && (
+              <CustomButton
+                customStyle={styles.btnText}
+                btnText={"Previous"}
+                handlerFunction={handleClickPrevious}
+              />
+            )}
+            <CustomButton
+              customStyle={styles.btnText}
+              btnText={currentQueIndex === 4 ? "Submit" : "Next"}
+              handlerFunction={handleClickNext}
+            />
+          </div>
         </div>
         <div className={styles.rightSec}>
           {supportImage && <img src={newton} className={styles.supportImage} />}

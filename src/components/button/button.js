@@ -7,11 +7,11 @@ export default function CustomButton ({
 }) {
     return (
         <button 
-            className={
+            className = {
                 `${styles.defaultStyle} 
                 ${customStyle}`
             }
             onClick={handlerFunction}
-        > { btnText || 'Submit' } </button>
+        > {btnText || 'Submit'} </button>
     )
 }
