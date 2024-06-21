@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 export default function TestInfo() {
   // use states to save name, slected subject, ans error message if any.
   const [name, setName] = useState("");
-  const [course, setCourse] = useState("");
   const [selectedSub, setSelectedSub] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
@@ -17,11 +16,6 @@ export default function TestInfo() {
     setErrMsg("");
     setName(e.target.value);
     // setting unser input name
-  }
-
-  function handleChangeCourse(e) {
-    setErrMsg("");
-    setCourse(e.target.value);
   }
 
   function handleSelectSubject(e) {
@@ -37,10 +31,7 @@ export default function TestInfo() {
       setErrMsg("Please Add your name.");
       return;
     }
-    if(!course){
-      setErrMsg("Please Add your course.");
-      return;
-    }
+
     if (!selectedSub) {
       setErrMsg("Please select the subject.");
       return;
@@ -68,11 +59,6 @@ export default function TestInfo() {
         className={styles.input}
         placeholder="Enter your name"
         onChange={handleChangeName}
-      />
-      <input
-      className={styles.input}
-      placeholder="Enter your course"
-      onChange={handleChangeCourse}
       />
 
       {/* select to collect user subject for test */}

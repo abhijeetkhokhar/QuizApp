@@ -19,7 +19,6 @@ export default function Greeting({ data }) {
   return (
     <div className={styles.wrapper}>
       <h4>Hey {userName}</h4>
-      <h5>Course : {}</h5>
       <p>You have scored : {score}/10</p>
       <p>status : {score > 5 ? "PASS" : "FAIL"}</p>
       <CustomButton
